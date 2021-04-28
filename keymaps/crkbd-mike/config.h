@@ -29,7 +29,7 @@ along with accc program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_SERIAL_PD2
 
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 300   
+#define TAPPING_TERM 200   
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
@@ -39,13 +39,16 @@ along with accc program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define COMBO_COUNT 4
 
-#undef RGBLED_NUM
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 27
-#define RGBLIGHT_LIMIT_VAL 120
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 17
-#define RGBLIGHT_VAL_STEP 17
-
+#ifdef RGBLIGHT_ENABLE
+    #undef RGBLED_NUM
+    #define RGBLED_NUM 27
+    #define RGBLIGHT_ANIMATIONS
+    #define RGBLIGHT_SLEEP
+    #define RGBLIGHT_SPLIT
+    #define RGBLIGHT_LIMIT_VAL 120
+    #define RGBLIGHT_HUE_STEP 10
+    #define RGBLIGHT_SAT_STEP 17
+    #define RGBLIGHT_VAL_STEP 17
+#endif
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
