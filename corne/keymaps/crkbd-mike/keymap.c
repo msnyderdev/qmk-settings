@@ -39,6 +39,11 @@ enum combos {
   UI_EQUAL
 };
 
+enum custom_keycodes {
+    MC_WQ,
+    MC_NEW
+};
+
 const uint16_t PROGMEM rbrck_combo[] = {KC_V, KC_M, COMBO_END};
 const uint16_t PROGMEM lbrck_combo[] = {KC_B, KC_N, COMBO_END};
 const uint16_t PROGMEM dash_combo[] =  {KC_I, KC_O, KC_P, COMBO_END};
@@ -49,6 +54,23 @@ combo_t key_combos[COMBO_COUNT] = {
   [ER_RBRC] = COMBO(rbrck_combo, KC_RBRC),
   [UI_MINUS] = COMBO(dash_combo, KC_MINUS),
   [UI_EQUAL] = COMBO(equal_combo, KC_EQUAL)
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case MC_WQ:
+        if (record->event.pressed) {
+            // when keycode QMKBEST is pressed
+            SEND_STRING(":wq\n");
+        }
+        break;
+    case MC_NEW:
+        if (record->event.pressed) {
+           SEND_STRING(SS_LCTL(SS_LSFT("n"))); // selects all and copies
+        }
+        break;
+    }
+    return true;
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -77,11 +99,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_TILD,  KC_EXLM,  KC_AT,    KC_HASH,    KC_DLR,    KC_PERC,            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_BSPC,
+      KC_TILD,  KC_EXLM,  KC_AT,    KC_HASH,    KC_DLR,   KC_PERC,             KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, _______,  _______,  _______,    _______,   _______,             _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,  _______,
+      MC_NEW, MC_WQ,  _______,  _______,    _______,   _______,             _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,  _______,
   //|--------+--------+--------+--------+--------+---------|                   |--------+--------+--------+--------+--------+--------|
-      _______,  RGB_HUI,  RGB_MODE_FORWARD, DEFAULT, RGB_TOG, A(KC_PSCR),      _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,    _______,
+      DM_REC1, DM_REC2,  DM_RSTP,  DM_PLY1,    DM_PLY2,   A(KC_PSCR),          _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,    _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                         _______,   KC_LGUI,  _______,   _______, _______, _______
                                       //`--------------------------'  `-------------------------

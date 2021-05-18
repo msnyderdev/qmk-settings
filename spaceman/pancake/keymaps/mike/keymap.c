@@ -17,12 +17,9 @@ enum layers {
 #define TAB_MEH MEH_T(KC_TAB)
 
 // Right-hand home row mods
-#define HOME_TAB RCTL_T(KC_TAB)
+#define HOME_TAB LSFT_T(KC_TAB)
 
 #define KC_QUEST LSFT(KC_SLSH)
-
-#define GAMING TG(3)
-#define DEFAULT TG(0)
 
 enum combos {
   WE_LBRC,
@@ -58,11 +55,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_DEFAULT] = LAYOUT_ortho_4x12(
     HOME_ESC, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,     KC_I,       KC_O,      KC_P,     KC_BSPC,
-    HOME_TAB, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,     KC_K,       KC_L,      KC_SCLN,  KC_QUOT,
-    KC_LCTRL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,     KC_COMM,    KC_DOT,    KC_SLSH,  KC_BSLS,
-    KC_LSFT,  KC_LALT, FN,      KC_DEL,  RAISE,   LOWER,   KC_SPC,  KC_ENT,   KC_LCBR,    KC_RCBR,   KC_MINUS, KC_PLUS
+    KC_LCTRL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,     KC_K,       KC_L,      KC_SCLN,  KC_QUOT,
+    HOME_TAB, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,     KC_COMM,    KC_DOT,    KC_SLSH,  KC_BSLS,
+    KC_LALT,  KC_LGUI, FN,      LOWER,   RAISE,   KC_SPC,  KC_ENT,  KC_DEL,   KC_LBRC,    KC_RBRC,   KC_MINUS, KC_EQUAL
 ),
-
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
@@ -71,14 +67,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |   {  |   }  | Vol+ |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |   ?  |      | Vol- |      |
+ * |      |      |      |      |      |             |      |   ?  |      | Vol- |      |   
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_ortho_4x12(
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, KC_LGUI, _______, _______, _______, _______, _______, _______, _______, _______
+    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_BSPC,
+    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_LCBR, KC_RCBR, KC_UNDS,  KC_PLUS
 ),
 
 /* Raise
@@ -93,10 +89,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_ortho_4x12(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ 
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_BSPC,
+    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______
 ),
  
  /* FN
@@ -112,9 +108,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_FN] = LAYOUT_ortho_4x12(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______
 ),
 
 
